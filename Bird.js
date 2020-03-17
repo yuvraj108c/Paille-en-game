@@ -1,7 +1,8 @@
 class Bird {
   constructor(url) {
     this.url = url;
-    (this.sizeX = 150), (this.sizeY = 100);
+    this.sizeX = 150;
+    this.sizeY = 100;
   }
   getImage() {
     let i = new Image();
