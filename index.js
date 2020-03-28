@@ -4,33 +4,41 @@ const ctx = cvs.getContext("2d");
 cvs.setAttribute("height", window.innerHeight - 4);
 cvs.setAttribute("width", window.innerWidth);
 
-let bird_open = new Image();
-let bird_close = new Image();
+let bird = new Image();
 let bg = new Image();
 
-bird_open.src = "./Images/bird_open.png";
-bird_close.src = "./Images/bird_close.png";
 bg.src = "./Images/SunsetDrawing.jpg";
+bird.src = "./Images/bird_sprite.png";
 
-const birdSizeX = 150;
-const birdSizeY = 100;
+var flySound = new Audio();
+flySound.src = "Sounds/fly.mp3";
 
-let bX = 100;
-let bY = 100;
+let bX = 0;
+let bY = 0;
+let birdSizeX = 459;
+let birdSizeY = 150;
 
-let flap_const = 10;
-let flap_speed = 5;
+let time = 0;
+let speed = 5;
 
-(function loop() {
-  draw();
-  flap_const == (flap_const == 10 ? 11 : 10);
+setInterval(() => {
+  time++;
+  ctx.clearRect(bX, bY, birdSizeX, birdSizeY);
+  drawBird();
+}, 100);
 
-  requestAnimationFrame(loop);
-})();
-
-function draw() {
+function drawBird() {
   ctx.drawImage(bg, 0, 0, cvs.width, cvs.height);
-  flap_const === 10
-    ? ctx.drawImage(bird_close, bX, bY, birdSizeX, birdSizeY)
-    : ctx.drawImage(bird_open, bX, bY, birdSizeX, birdSizeY);
+  ctx.drawImage(
+    bird,
+    time % speed == 0 ? bX : bX + birdSizeX / 2,
+    bY,
+    birdSizeX / 2,
+    birdSizeY,
+    0,
+    0,
+    birdSizeX / 2,
+    birdSizeY
+  );
+  flySound.play();
 }

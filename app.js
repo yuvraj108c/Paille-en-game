@@ -60,35 +60,35 @@ var reqId;
 function draw() {
   ctx.drawImage(bg, 0, 0, cvs.width, cvs.height);
 
-  // for (var i = 0; i < fishCoord.length; i++) {
+  for (var i = 0; i < fishCoord.length; i++) {
+    ctx.drawImage(fish, fishCoord[i].x, fishCoord[i].y, fishSizeX, fishSizeY);
+    fishCoord[i].x -= 2;
+    fishCoord[i].y += 0.2;
+    if (fishCoord[i].x == cvs.width - 300) {
+      fishCoord.push({
+        x: cvs.width,
+        y: Math.floor(Math.random() * (300 - 100) + 100)
+      });
+    }
 
-  //     ctx.drawImage(fish, fishCoord[i].x, fishCoord[i].y, fishSizeX, fishSizeY);
-  //     fishCoord[i].x -= 2;
-  //     fishCoord[i].y += 0.2;
-  //     if (fishCoord[i].x == cvs.width - 300) {
-  //         fishCoord.push({
-  //             x: cvs.width,
-  //             y: Math.floor(Math.random() * (300 - 100) + 100)
-  //         });
-
-  //     }
-
-  //     // Bird eats fish
-  //     if ((bX + bird.width >= fishCoord[i].x && bX + bird.width <= fishCoord[i].x + fish.width) && (bY <= fishCoord[i].y + fish.height && bY + bird.height >= fishCoord[i].y)) {
-  //          score ++;
-  //          console.log(score);
-  //          scor.play();
-  //         fishCoord.splice(i,1);
-
-  //     }
-  //     // Bird falls in water
-  //     else if (bY + bird.height > cvs.height - 150){
-  //         window.cancelAnimationFrame( reqId );
-  //         message();
-  //         return;
-
-  //     }
-  // }
+    // Bird eats fish
+    if (
+      bX + bird.width >= fishCoord[i].x &&
+      bX + bird.width <= fishCoord[i].x + fish.width &&
+      bY <= fishCoord[i].y + fish.height && bY + bird.height >= fishCoord[i].y
+    ) {
+      score++;
+      console.log(score);
+      scor.play();
+      fishCoord.splice(i, 1);
+    }
+    // Bird falls in water
+    else if (bY + bird.height > cvs.height - 150) {
+      window.cancelAnimationFrame(reqId);
+      message();
+      return;
+    }
+  }
 
   // Ternary operator used to flap wings based on modulo function
   time % flap_speed === 0
