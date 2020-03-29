@@ -75,7 +75,8 @@ function draw() {
     if (
       bX + bird.width >= fishCoord[i].x &&
       bX + bird.width <= fishCoord[i].x + fish.width &&
-      bY <= fishCoord[i].y + fish.height && bY + bird.height >= fishCoord[i].y
+      bY <= fishCoord[i].y + fish.height &&
+      bY + bird.height >= fishCoord[i].y
     ) {
       score++;
       console.log(score);
