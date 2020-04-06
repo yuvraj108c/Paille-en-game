@@ -9,10 +9,11 @@ let bg = new Image();
 let fish = new Image();
 let shark = new Image();
 
-bg.src = "./Images/SunsetDrawing.jpg";
+// bg.src = "./Images/SunsetDrawing.jpg";
+bg.src = "./Images/b3.jpg";
 bird.src = "./Images/bird_sprite.png";
-fish.src = "./Images/dive.png";
-shark.src = "./Images/whale.png";
+fish.src = "./Images/fish_sprite.png";
+shark.src = "./Images/shark_sprite.png";
 
 let flySound = new Audio();
 let scoreSound = new Audio();
@@ -26,10 +27,10 @@ let dY = 0;
 
 let birdSizeX = 460;
 let birdSizeY = 150;
-let fishSizeX = 75;
-let fishSizeY = 75;
-let sharSizeX = 150;
-let sharSizeY = 150;
+let fishSizeX = 229;
+let fishSizeY = 65;
+let sharSizeX = 500;
+let sharSizeY = 250;
 
 let time = 0;
 let speed = 10;
@@ -41,17 +42,17 @@ let fishCoord = [
   {
     x: cvs.width,
     y: cvs.height - 100,
-    maxX: Math.floor(Math.random() * (cvs.height / 3 - 200) + 200),
-    reachedTop: false
-  }
+    maxY: Math.floor(Math.random() * (cvs.height / 3 - 200) + 200),
+    reachedTop: false,
+  },
 ];
 let sharkCoord = [
   {
     x: cvs.width,
     y: cvs.height - 100,
-    maxX: dY,
-    reachedTop: false
-  }
+    maxY: dY,
+    reachedTop: false,
+  },
 ];
 
 document.addEventListener("keydown", moveBird);
@@ -74,11 +75,22 @@ function drawBird() {
 function drawFish() {
   for (let i = 0; i < fishCoord.length; i++) {
     let f = fishCoord[i];
-    ctx.drawImage(fish, f.x, f.y, fishSizeX, fishSizeY);
+
+    ctx.drawImage(
+      fish,
+      time % speed == 0 ? bX : bX + fishSizeX / 2,
+      bY,
+      fishSizeX / 2,
+      fishSizeY,
+      f.x,
+      f.y,
+      fishSizeX / 2,
+      fishSizeY
+    );
 
     f.x -= 5;
 
-    if (f.y < f.maxX) {
+    if (f.y < f.maxY) {
       f.reachedTop = true;
     }
 
@@ -111,8 +123,8 @@ function drawFish() {
         Math.random() * (cvs.width - cvs.width / 2) + cvs.width / 2
       ),
       y: cvs.height - 100,
-      maxX: Math.floor(Math.random() * (cvs.height / 3 - 200) + 200),
-      reachedTop: false
+      maxY: Math.floor(Math.random() * (cvs.height / 3 - 200) + 200),
+      reachedTop: false,
     });
   }
 }
@@ -120,11 +132,22 @@ function drawFish() {
 function drawShark() {
   for (let i = 0; i < sharkCoord.length; i++) {
     let f = sharkCoord[i];
-    ctx.drawImage(shark, f.x, f.y, sharSizeX, sharSizeY);
+
+    ctx.drawImage(
+      shark,
+      time % speed == 0 ? bX : bX + sharSizeX / 2,
+      bY,
+      sharSizeX / 2,
+      sharSizeY,
+      f.x,
+      f.y,
+      sharSizeX / 2,
+      sharSizeY
+    );
 
     f.x -= 5;
 
-    if (f.y < f.maxX) {
+    if (f.y < f.maxY) {
       f.reachedTop = true;
     }
 
@@ -144,7 +167,12 @@ function drawShark() {
     let remainingY = Math.abs(f.y - dY);
 
     // Shark eat bird
-    if (remainingX <= 15 && remainingX >= -15 && remainingY <= 25) {
+    if (
+      remainingX <= 25 &&
+      remainingX >= -50 &&
+      remainingY <= 25 &&
+      remainingY >= -50
+    ) {
       sharkCoord.splice(i, 1);
       message();
       clearInterval(interval);
@@ -158,8 +186,8 @@ function drawShark() {
         Math.random() * (cvs.width - cvs.width / 2) + cvs.width / 2
       ),
       y: cvs.height - 100,
-      maxX: dY,
-      reachedTop: false
+      maxY: Math.floor(Math.random() * cvs.height),
+      reachedTop: false,
     });
   }
 }
@@ -195,13 +223,15 @@ function Start() {
     drawFish();
     drawShark();
 
-    flySound.play();
-
     // Score indicator
     ctx.fillStyle = "white";
     ctx.font = "20px Verdana";
     ctx.fillText("Score : " + score, 10, 25);
   }, 50);
+
+  interval2 = setInterval(() => {
+    flySound.play();
+  }, 700);
 }
 
 function message() {
