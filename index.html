@@ -4,17 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>P-E-Q Game</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="menu">
-      <h1>Paille En Queue Game</h1>
-      <button onclick="Start()" name="Start" class="menuBtn">Start Game</button
-      ><br />
-      <button onclick="Instruct()" name="Instructions" class="menuBtn">
-        Instructions</button
-      ><br />
-      <button onclick="About()" name="About" class="menuBtn">About</button>
+    <div class="menu">
+      <div class="jumbotron">
+        <h1>Paille En Queue Game</h1>
+        <br />
+        <img src="Images/bird.gif" alt="" />
+        <br /><br />
+        <button class="btn btn-primary btn-block" onclick="Start()">
+          Start Game</button
+        ><br />
+        <button
+          class="btn btn-info btn-block"
+          onclick="Instruct()"
+          name="Instructions"
+        >
+          Instructions</button
+        ><br />
+        <button
+          class="btn btn-secondary btn-block"
+          onclick="About()"
+          name="About"
+          class="menuBtn"
+        >
+          About
+        </button>
+      </div>
     </div>
     <canvas id="canvas"></canvas>
     <script src="index.js"></script>

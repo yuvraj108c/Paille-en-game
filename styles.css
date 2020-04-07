@@ -8,68 +8,19 @@ body {
   overflow: hidden;
 }
 
-#menu {
-  border: 2px solid black;
-  border-radius: 15px;
-  width: 20%;
-  height: 400px;
-  text-align: center;
-  margin: 5% auto;
-  background-color: darkgoldenrod;
-}
-button.menuBtn {
+.menu {
   width: 40%;
-  height: 15%;
-  margin: 5%;
-  border-radius: 15px;
-  font: 15px Verdana;
-}
-button:focus {
-  outline: none;
-}
-#msg {
-  border: 2px solid black;
-  border-radius: 15px;
-  width: 10%;
-  height: 20%;
+  height: 580px;
   text-align: center;
-  font-size: large;
   margin: 5% auto;
-  background-color: darkgoldenrod;
-  display: block;
 }
 
-button#re {
-  width: 60px;
-  height: 25px;
-  border-radius: 10px;
-  margin-top: 10px;
+.menu.instructions {
+  text-align: left;
 }
 
-#det {
-  border: 2px solid black;
-  border-radius: 15px;
-  width: 35%;
-  height: 30%;
-  padding: 30px;
-  font-size: large;
-  margin: 5% auto;
-  background-color: darkgoldenrod;
-  display: block;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  list-style-position: inside;
+.menu.about ol {
+  list-style: none;
   text-align: center;
-}
-#abt {
-  border: 2px solid black;
-  border-radius: 15px;
-  width: 25%;
-  height: 30%;
-  font-size: large;
-  margin: 5% auto;
-  background-color: darkgoldenrod;
-  display: block;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  list-style-position: inside;
-  text-align: center;
+  padding: 0;
 }

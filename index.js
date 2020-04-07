@@ -9,7 +9,6 @@ let bg = new Image();
 let fish = new Image();
 let shark = new Image();
 
-// bg.src = "./Images/SunsetDrawing.jpg";
 bg.src = "./Images/b3.jpg";
 bird.src = "./Images/bird_sprite.png";
 fish.src = "./Images/fish_sprite.png";
@@ -17,8 +16,12 @@ shark.src = "./Images/shark_sprite.png";
 
 let flySound = new Audio();
 let scoreSound = new Audio();
+let bgSound = new Audio();
+let overSound = new Audio();
 flySound.src = "Sounds/fly.mp3";
-scoreSound.src = "Sounds/score.mp3";
+scoreSound.src = "Sounds/eat.mp3";
+bgSound.src = "Sounds/background.wav";
+overSound.src = "Sounds/over.mp3";
 
 let bX = 0;
 let bY = 0;
@@ -111,7 +114,9 @@ function drawFish() {
 
     // Bird eats fish
     if (remainingX <= 15 && remainingX >= -15 && remainingY <= 50) {
+      scoreSound.volume = 0.5;
       scoreSound.play();
+
       score++;
       fishCoord.splice(i, 1);
     }
@@ -173,10 +178,14 @@ function drawShark() {
       remainingY <= 25 &&
       remainingY >= -50
     ) {
+      overSound.play();
       sharkCoord.splice(i, 1);
-      message();
       clearInterval(interval);
-      return;
+
+      setTimeout(() => {
+        message();
+        return;
+      }, 2000);
     }
   }
   // Create new shark
@@ -215,7 +224,11 @@ function moveBird(e) {
 }
 
 function Start() {
-  document.getElementById("menu").style.display = "none";
+  document.getElementsByClassName("menu")[0].style.display = "none";
+  bgSound.play();
+  bgSound.volume = 0.1;
+  bgSound.loop = true;
+
   interval = setInterval(() => {
     time++;
     ctx.clearRect(bX, bY, birdSizeX, birdSizeY);
@@ -231,6 +244,7 @@ function Start() {
 
   interval2 = setInterval(() => {
     flySound.play();
+    flySound.volume = 0.1;
   }, 700);
 }
 

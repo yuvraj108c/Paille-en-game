@@ -4,14 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Game Over</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <span id="msg">
-      <label for="">Game Over</label><br />
-      <h3 id="score-indicator"></h3>
-      <button id="re" onclick="reload()" name="Restart">Restart</button>
-    </span>
+    <div class="menu">
+      <div class="jumbotron">
+        <h3>Game Over</h3>
+
+        <hr class="my-3" />
+        <h6 id="score-indicator"></h6>
+        <br />
+        <button
+          class="btn btn-secondary btn-block"
+          onclick="reload()"
+          name="About"
+          class="menuBtn"
+        >
+          Menu
+        </button>
+      </div>
+    </div>
     <script>
       const s = window.location.search.substring(7);
       document.getElementById("score-indicator").textContent = "Score: " + s;
